@@ -5,4 +5,31 @@ SGBD: Sistema Gerenciador de Banco de Dados;
 DBA: DataBase Administrator;
 
 SQL: Structured Query Language;
+ -> DML: Data Manipulation Language;
+ -> DDL:
+ -> DQL:
+
+Site para baixar o SQL --> https://www.mysql.com/
+Arraste até o final e Baixe o Server
+
+Hostname: É o IP que a máquina interpreta como padrão, logo ela vai interpretar o local dela como ela mesma caso seja o ip 127.0.0.1, 
+Imaginando que você está no WhatsApp, é como se você mandasse mensagem para sí mesmo.
+
+DDL = Data Definition Language
+DML = Data Manipulation Language
+DQL = Data Query Language
+
+ERP = significa Enterprise Resource Planning, ou seja, Planejamento dos Recursos da Empresa. É um software que automatiza processos,
+armazena dados e unifica a visualização de resultados em uma única plataforma.
+
+-------------------------Utilizando o MYSQL-------------------------
+
+Hostname: é o ip da máquina mesmo pois será enviado para elas os dados, sendo o ip 127.0.0.1;
+
+Porta padrão do MySQL: 3306;
+
+Engenharia: Primeiro desenhar e depois construir;
+
+Engenharia Reversa: Pega a construção e trasnforma no desenho;
+
 
