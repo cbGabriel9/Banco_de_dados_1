@@ -32,4 +32,28 @@ Engenharia: Primeiro desenhar e depois construir;
 
 Engenharia Reversa: Pega a construção e trasnforma no desenho;
 
+-------------------------Modelagem de dados-------------------------
+
+As técnicas de modelagem são usadas para registrar os dados nas mais diferentes níveis de abordagem. O objetivo da modelagem é dar difelidade à representação das "coisas do mundo" por meio do computador. Os dados podem mostrar toda sua elasticidade de assumir várias formas, dependendo do contexto que os envolvem.
+
+ Modelo de dados é a representação gráfica e textual das estruturas, operadores e regras que definem os dados. Cada entidade deve ser vista como um conjunto que pode ou não ter relacionamento (associação) com outro conjunto. Um BD relacional consiste em uma coleção de objetivos básicos chamados tabelas e seus relacionamentos.
+
+ Tabela: Conjunto único de atributos ou características, chamadas colunas.
+
+ Relacionamento: Associação entre 2 ou mais tabelas.
+
+--> Diagrama E/R (Entidade/Relacionamento)
+
+Ferramenta para modelagem conceitual de BD amplamente utilizada em projetos, considerada praticamente um padrão de modelagem.
+
+ Entidades: Componentes físicos e abstratos do mundo real, sobre os quais são armazenados os dados. Ex: Cliente, conta, banco, filme, etc.
+
+ Atributo: Propriedade da entidade. Não tem vida própria. Existe para caracterizar uma entidade. Ex: Nome, valor, data nascimento, etc.
+
+ Ocorrência: Conjunto de atributos de uma determinada entidade. Uma linha dentro da entidade. Ex: José da Silva, 25-02-1980 dentro da entidade cliente.
+
+ Relacionamento: Correspondência entre entidades. Associação entre 2 ou mais conjuntos de dados. Ex: Uma conta está sempre associada a pelo menos 1 cliente.
+
+ Identificador ou atributo determinante: Um atributo ou coleção de atributos que determina de modo único uma ocorrência de enteidade. Ex: Código de matrícula, CPF, CPNJ.
+ 
 
