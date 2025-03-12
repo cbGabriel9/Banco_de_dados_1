@@ -112,5 +112,28 @@ FROM PLANTS
 WHERE PLANT_NAME <> 'CANNABIS' -- <>: É o símbolo de diferente
 AND SENSOR_VALUE < 0.5566
 AND SENSOR_VALUE > 0.2411;
- 
 
+VARCHAR: Utiliza apenas o espaço utilizado;
+CHAR: Utiliza o total estabelecido por mais que não utilize.
+
+Cardinalidade: 1 para 1 (1:1), 1 para vários (1:N), e vários para vários(N:N) essa última é uma anomalia.
+
+Estabelecer uma relação de chave primária e chave estrangeira serve para indicar uma relação, onde não permite criar um item sem ter uma informação na tabela pai, caso eu exclua uma item ele apaga de ambas as tabelas.
+
+
+-- DEFININDO UMA FK APÓS TER CRIADO A TABELA
+ALTER TABLE TRANSACAO
+ADD FOREIGN KEY (ID_CONTA)
+REFERENCES CONTA(ID);
+
+-- CRIANDO INDEX (Serve para criar um tipo de filtro para pesquisar dps)
+CREATE INDEX IDX_TRANSACAO_TP_TRANSACAO
+ON TRANSACAO (TIPO_TRANSACAO);
+
+ATIVIDADE - INDIVIDUAL
+
+Com base no exemplo executado em laboratório para o Banco de Dados UNOESC BANK, com relacionamentos de cardinalidade 1:N monte um script de BD para o seguinte problema:
+
+Uma empresa veterinária deseja criar um simples banco de dados para armazenar os registros dos TIPOS_ANIMAIS que atende, podendo ser CANINOS, FELINOS, SUÍNOS, CAPRINOS E EQUINOS, ETC onde cada TIPO_ANIMAL poderá ter vários ANIMAIS, para cada animal, você deve armazenar (ID, NOME, ID_TIPO_ANIMAL, DT_NASCIMENTO, COR, PESO, ALTURA).
+
+Além disso, o BD deve armazenar um histórico de vacinação, onde ANIMAL pode ter 'N' VACINAS. Para a tabela VACINA, armazene (ID, NOME, DATA_APLICACAO, ID_ANIMAL [FK])
