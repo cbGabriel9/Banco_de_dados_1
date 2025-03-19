@@ -6,8 +6,8 @@ DBA: DataBase Administrator;
 
 SQL: Structured Query Language;
  -> DML: Data Manipulation Language;
- -> DDL:
- -> DQL:
+ -> DDL: Data Definition Language;
+ -> DQL: Data Query Language;
 
 Site para baixar o SQL --> https://www.mysql.com/
 Arraste até o final e Baixe o Server
@@ -137,3 +137,34 @@ Com base no exemplo executado em laboratório para o Banco de Dados UNOESC BANK,
 Uma empresa veterinária deseja criar um simples banco de dados para armazenar os registros dos TIPOS_ANIMAIS que atende, podendo ser CANINOS, FELINOS, SUÍNOS, CAPRINOS E EQUINOS, ETC onde cada TIPO_ANIMAL poderá ter vários ANIMAIS, para cada animal, você deve armazenar (ID, NOME, ID_TIPO_ANIMAL, DT_NASCIMENTO, COR, PESO, ALTURA).
 
 Além disso, o BD deve armazenar um histórico de vacinação, onde ANIMAL pode ter 'N' VACINAS. Para a tabela VACINA, armazene (ID, NOME, DATA_APLICACAO, ID_ANIMAL [FK])
+
+--------------------------------------------------------------
+
+CREATE TABLE `ITEM_NOTA_FISCAL`(
+	`NRO_NOTA` INT NOT NULL,
+    `COD_PRODUTO` INT NOT NULL,
+    `QTD_PRODUTO` INT NOT NULL,
+    `VL_PRECO` FLOAT NOT NULL,
+    PRIMARY KEY(NRO_NOTA, COD_PRODUTO), -- Uma única primary key porém ela é composta, foi utilizado aqui pois não se pode repetir o mesmo produto e o nro da nota, em vez de adicionar duas linhas de codigo 1, numero da nota 2, e qtde 1, deve-se colocar uma linha com o codigo 1, numero da nota 2 e a qtde 2.
+    CONSTRAINT FK_NRO_NOTA_NOTA_FISCAL
+		FOREIGN KEY (NRO_NOTA)
+        REFERENCES NOTA_FISCAL (NRO_NOTA),
+	CONSTRAINT FK_COD_PRODUTO_PRODUTO
+		FOREIGN KEY (COD_PRODUTO)
+        REFERENCES PRODUTO(COD_PRODUTO)
+);
+
+FAZENDO UPDATE COM WHERE NA TABELA PRODUTOS
+
+SELECT * FROM `PRODUTO` WHERE COD_PRODUTO = 3;
+UPDATE PRODUTO
+SET VL_PRODUTO = 45
+WHERE COD_PRODUTO = 3;
+
+DELETANDO REGISTROS COM O DELETE
+
+DELETE FROM PRODUTO
+WHERE COD_PRODUTO = 3;
+
+ATIVIDADE
+
