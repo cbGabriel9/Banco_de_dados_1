@@ -189,3 +189,19 @@ B) QUAL O TOTAL DE VACINAS APLICADAS REGISTRADAS NO SISTEMA?
 C) QUANTOS ANIMAIS TEMOS AGRUPADOS REGISTRADOS PARA CADA CATEGORIA?
 
 D) QUAL A CATEGORIA DE ANIMAIS QUE MAIS VACINAS RECEBEU?
+
+ATV SEMINÁRIO
+
+Com base no enunciado a seguir, elabore o diagrama de entidade e relacionamento do script de criação do banco de dados, e um script de semeadura de dados (Folha de código).
+
+ Um simpósio será organizado na universidade. 
+ \A organização é de responsabilidade de uma ou mais pessoas. 
+ Serão apresentados nesse simpósio vários minicursos, e cada um deles será ministrado por apenas uma pessoa.
+ Também serão aceitos artigos, sendo que cada um deles possuirá um tema (Banco de dados, redes, compiladores, realidade virtual e etc). 
+ Estes artigos são escritos por no mínimo uma pessoa e não possuem limite de número de autores. 
+ Cada artigo será encaminhado para uma comissão científica, sendo que há uma comissão científica para cada tema, que por sua vez é formada por uma ou mais pessoas, que emitirão um parecer sobre o artigo. 
+ As pessoas se inscreverão no simpósio, podendo escolher se querem assistir os minicursos (E quais) e/ou palestras (E quais).
+
+Precisamos entregar: 
+Diagrama de entidade e relacionamento;
+Script de semeadura de dados;
