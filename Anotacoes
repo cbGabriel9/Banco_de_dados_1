@@ -205,3 +205,24 @@ Com base no enunciado a seguir, elabore o diagrama de entidade e relacionamento 
 Precisamos entregar: 
 Diagrama de entidade e relacionamento;
 Script de semeadura de dados;
+
+Normalização
+
+Serve para analisar tabelas e organizá-las de modo que sua estrutura seja simples, relacional e estável, para que o gerenciamento possa ser eficiente e seguro. Os objetivos são evitar a perda e a repetição de informação e atingir uma forma de representação adequada para o que se deseja armazenar.
+
+Técnica empregada para melhorar as estruturas de dados resultantes de um projeto de dados do sistema. Evita problemas de redundância e anomalia através da decomposição de uma entidade ou mais entidades.
+
+As formas normais (FN) são as regras de normalização e podem ocasionar uma proliferação de entidades que nem sempre é o ideal do ponto de vista de performance, devendo ser balanceadas as vantagens e desvantagens antes da efetivação dos resultados de uma FN (NF). Assim, a normalização é um processo sistemático de geração de tabelas podendo ser aplicadas regras que vão da primeira até a quinta FN. Em grande parte dos casos, a aplicação da terceira forma normal já produz um conjunto de tabelas que organiza satisfatoriamente um schema. 
+
+Para adequar uma tabela à uma FN deve-se redesenhar seu formato. A normalização também pode ser utilizada para projetar tabelas a partir de documentos, considerando-os como uma única tabela e aplicado-os as regras. 
+Exemplo: Nota Fiscal 
+nr. nota, 
+nm. cliente, 
+endereço, 
+vendedor, 
+data de emissão, 
+produto 1, 
+produto 2, 
+produto n.
+
+A tabela acima está desnormalizada, pois os campos, produto 1, produto 2 e o produto n não devem estar ali naquele local, pois a tabela continuará a crescer verticalmente, o que não é o correto.
