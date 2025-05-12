@@ -226,3 +226,7 @@ produto 2,
 produto n.
 
 A tabela acima está desnormalizada, pois os campos, produto 1, produto 2 e o produto n não devem estar ali naquele local, pois a tabela continuará a crescer verticalmente, o que não é o correto.
+
+1 Forma Normal: Ter apenas um dado em cada célula da tabela. Criar outra linha para essa informação.
+2 Forma Normal: Onde existe primary key composta porém as outras colunas da tabela só dependem de uma primary key. Solução: Criar uma tabela separada.
+3 Forma Normal: Onde uma coluna depende de outra que não é PK. Solução: Criar uma tabela separada.
