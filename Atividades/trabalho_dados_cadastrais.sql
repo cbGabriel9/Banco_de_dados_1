@@ -1,0 +1,268 @@
+CREATE DATABASE FICHA_CADASTRO;
+USE FICHA_CADASTRO;
+
+CREATE TABLE TIPO_DOCUMENTO_IDENTIFICACAO (
+	ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    NOME VARCHAR (20)
+);
+
+CREATE TABLE NACIONALIDADE (
+	ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    NOME VARCHAR (255)
+);
+
+CREATE TABLE ESTADO_CIVIL (
+	ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    NOME VARCHAR (255)
+);
+
+CREATE TABLE SEXO (
+	ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    NOME VARCHAR (255)
+);
+
+CREATE TABLE ENDERECO (
+	ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    RUA VARCHAR (100),
+    NUMERO INT,
+	BAIRRO VARCHAR (100),
+    CIDADE VARCHAR (100),
+    UF VARCHAR (100),
+    PAIS VARCHAR (100),
+    CEP VARCHAR (100)
+);
+ 
+CREATE TABLE PACIENTE (
+    ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ID_TIPO_DOCUMENTO_IDENTIFICACAO INT,
+    ID_NACIONALIDADE INT,
+    ID_SEXO INT,
+    ID_ESTADO_CIVIL INT,
+    ID_ENDERECO INT,
+    DOCUMENTO_IDENTIFICACAO VARCHAR(50),
+    MATRICULA VARCHAR(50),
+    NOME VARCHAR(100),
+    DT_NASCIMENTO DATE,
+    FOREIGN KEY (ID_TIPO_DOCUMENTO_IDENTIFICACAO) REFERENCES TIPO_DOCUMENTO_IDENTIFICACAO(ID),
+	FOREIGN KEY (ID_NACIONALIDADE) REFERENCES NACIONALIDADE(ID),
+	FOREIGN KEY (ID_SEXO) REFERENCES SEXO(ID),
+	FOREIGN KEY (ID_ESTADO_CIVIL) REFERENCES ESTADO_CIVIL(ID),
+	FOREIGN KEY (ID_ENDERECO) REFERENCES ENDERECO(ID)
+);
+
+CREATE TABLE EMPRESA (
+	ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    CNPJ VARCHAR (100),
+    NOME VARCHAR (255)
+);
+
+CREATE TABLE DEPARTAMENTO (
+	ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    NOME VARCHAR (255),
+    DESCRICAO VARCHAR (255)
+);
+
+CREATE TABLE CARGO (
+	ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    NOME VARCHAR (255),
+    DESCRICAO VARCHAR (255)
+);
+
+CREATE TABLE TIPO_EXAME (
+	ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    NOME VARCHAR (255)
+);
+
+CREATE TABLE DEPENDENTE (
+    ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ID_TIPO_DOCUMENTO_IDENTIFICACAO INT,
+    DOCUMENTO_IDENTIFICACAO VARCHAR(50),
+    NOME VARCHAR(100),
+    DT_NASCIMENTO DATE,
+
+    FOREIGN KEY (ID_TIPO_DOCUMENTO_IDENTIFICACAO) REFERENCES TIPO_DOCUMENTO_IDENTIFICACAO(ID)
+);
+
+CREATE TABLE PACIENTE_DEPENDENTE (
+    ID_PACIENTE INT NOT NULL,
+    ID_DEPENDENTE INT NOT NULL,
+    BOL_ATIVO BOOLEAN,
+    DT_FIM DATE,
+    PRIMARY KEY (ID_PACIENTE, ID_DEPENDENTE),
+    FOREIGN KEY (ID_PACIENTE) REFERENCES PACIENTE(ID),
+    FOREIGN KEY (ID_DEPENDENTE) REFERENCES DEPENDENTE(ID)
+);
+
+CREATE TABLE EXAMES_PACIENTE (
+    ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ID_PACIENTE INT,
+    ID_TIPO_EXAME INT,
+    ID_EMPRESA INT,
+    ID_DEPARTAMENTO INT,
+    ID_CARGO INT,
+    DT_MUDANCA DATE,
+    DT_EXAME DATE,
+    FOREIGN KEY (ID_PACIENTE) REFERENCES PACIENTE(ID),
+    FOREIGN KEY (ID_TIPO_EXAME) REFERENCES TIPO_EXAME(ID),
+    FOREIGN KEY (ID_EMPRESA) REFERENCES EMPRESA(ID),
+    FOREIGN KEY (ID_DEPARTAMENTO) REFERENCES DEPARTAMENTO(ID),
+    FOREIGN KEY (ID_CARGO) REFERENCES CARGO(ID)
+);
+
+
+
+
+-- ALIMENTAÇÃO DAS TABELAS
+INSERT INTO TIPO_DOCUMENTO_IDENTIFICACAO (NOME) VALUES
+('RG'), ('CPF'), ('CNH'), ('Passaporte'), ('Carteira de Trabalho'),
+('RNE'), ('Título de Eleitor'), ('Certidão Nasc.'), ('Certidão Cas.'), ('Outro');
+
+INSERT INTO NACIONALIDADE (NOME) VALUES
+('Brasileira'), ('Argentina'), ('Chilena'), ('Uruguaia'), ('Paraguaia'),
+('Peruana'), ('Boliviana'), ('Colombiana'), ('Venezuelana'), ('Mexicana');
+
+INSERT INTO ESTADO_CIVIL (NOME) VALUES
+('Solteiro'), ('Casado'), ('Divorciado'), ('Viúvo'), ('Separado'),
+('União Estável'), ('Complicado'), ('Não declarado'), ('Viúvo(a)'), ('Outro');
+
+INSERT INTO SEXO (NOME) VALUES
+('Masculino'), ('Feminino'), ('Outro'), ('Não Informado'), 
+('Masculino Trans'), ('Feminino Trans'), ('Intersexo'), ('Prefiro não dizer'),
+('Não Binário'), ('Desconhecido');
+
+INSERT INTO ENDERECO (RUA, NUMERO, BAIRRO, CIDADE, UF, PAIS, CEP) VALUES
+('Rua A', 10, 'Centro', 'São Paulo', 'SP', 'Brasil', '01001-000'),
+('Rua B', 20, 'Jardins', 'São Paulo', 'SP', 'Brasil', '01415-002'),
+('Rua C', 30, 'Moema', 'São Paulo', 'SP', 'Brasil', '04077-000'),
+('Av. Brasil', 100, 'Copacabana', 'Rio de Janeiro', 'RJ', 'Brasil', '22070-001'),
+('Rua D', 5, 'Centro', 'Belo Horizonte', 'MG', 'Brasil', '30130-001'),
+('Rua E', 45, 'Aldeota', 'Fortaleza', 'CE', 'Brasil', '60175-075'),
+('Rua F', 12, 'Boa Viagem', 'Recife', 'PE', 'Brasil', '51020-020'),
+('Rua G', 78, 'Centro', 'Curitiba', 'PR', 'Brasil', '80010-100'),
+('Rua H', 91, 'Centro', 'Porto Alegre', 'RS', 'Brasil', '90010-001'),
+('Rua I', 200, 'Centro', 'Manaus', 'AM', 'Brasil', '69005-070');
+
+INSERT INTO PACIENTE (
+    ID_TIPO_DOCUMENTO_IDENTIFICACAO, ID_NACIONALIDADE, ID_SEXO, ID_ESTADO_CIVIL, ID_ENDERECO,
+    DOCUMENTO_IDENTIFICACAO, MATRICULA, NOME, DT_NASCIMENTO
+) VALUES
+(1,1,1,1,1,'123456789','M0001','Carlos Silva','1985-03-10'),
+(2,2,2,2,2,'987654321','M0002','Ana Souza','1990-05-20'),
+(3,3,1,3,3,'111222333','M0003','João Mendes','1982-12-30'),
+(4,4,2,4,4,'444555666','M0004','Maria Lima','1975-07-15'),
+(5,5,1,1,5,'777888999','M0005','Pedro Costa','1995-01-01'),
+(6,6,2,2,6,'000111222','M0006','Luciana Alves','1988-10-10'),
+(7,7,1,3,7,'333444555','M0007','Roberto Dias','1970-02-25'),
+(8,8,2,4,8,'666777888','M0008','Fernanda Rocha','1992-11-11'),
+(9,9,1,5,9,'999000111','M0009','André Martins','1983-08-18'),
+(10,10,2,1,10,'555666777','M0010','Juliana Reis','1998-06-30');
+
+INSERT INTO EMPRESA (CNPJ, NOME) VALUES
+('12345678000101','Empresa A'), ('22345678000102','Empresa B'), ('32345678000103','Empresa C'),
+('42345678000104','Empresa D'), ('52345678000105','Empresa E'), ('62345678000106','Empresa F'),
+('72345678000107','Empresa G'), ('82345678000108','Empresa H'), ('92345678000109','Empresa I'),
+('02345678000100','Empresa J');
+
+INSERT INTO DEPARTAMENTO (NOME, DESCRICAO) VALUES
+('RH', 'Recursos Humanos'), ('TI', 'Tecnologia da Informação'), ('Financeiro', 'Financeiro e Contabilidade'),
+('Marketing', 'Publicidade e Mídia'), ('Jurídico', 'Departamento Legal'), ('Compras', 'Suprimentos'),
+('Vendas', 'Equipe Comercial'), ('Produção', 'Fabricação e Montagem'), ('Qualidade', 'Controle de Qualidade'),
+('Logística', 'Transporte e Armazenagem');
+
+INSERT INTO CARGO (NOME, DESCRICAO) VALUES
+('Analista', 'Analista de processos'), ('Desenvolvedor', 'Desenvolvedor de sistemas'),
+('Gerente', 'Gerente de departamento'), ('Assistente', 'Assistente administrativo'),
+('Coordenador', 'Coordenação de equipe'), ('Técnico', 'Técnico de campo'),
+('Engenheiro', 'Engenheiro de produção'), ('Estagiário', 'Estagiário de TI'),
+('Supervisor', 'Supervisor de operações'), ('Diretor', 'Diretor executivo');
+
+INSERT INTO TIPO_EXAME (NOME) VALUES
+('Exame Admissional'), ('Exame Demissional'), ('Exame Periódico'), ('Audiometria'),
+('Raio-X'), ('Hemograma'), ('Psicotécnico'), ('Acuidade Visual'),
+('Exame Clínico'), ('Eletrocardiograma');
+
+INSERT INTO DEPENDENTE (
+    ID_TIPO_DOCUMENTO_IDENTIFICACAO, DOCUMENTO_IDENTIFICACAO, NOME, DT_NASCIMENTO
+) VALUES
+(1,'D001','Lucas Silva','2010-01-01'), (2,'D002','Beatriz Souza','2012-05-10'),
+(3,'D003','Rafael Lima','2008-08-20'), (4,'D004','Camila Mendes','2005-07-30'),
+(5,'D005','Eduardo Costa','2011-03-15'), (6,'D006','Isabela Alves','2009-11-11'),
+(7,'D007','Tiago Dias','2007-02-22'), (8,'D008','Larissa Rocha','2006-06-06'),
+(9,'D009','Mateus Martins','2013-09-19'), (10,'D010','Sofia Reis','2014-12-24');
+
+INSERT INTO PACIENTE_DEPENDENTE (
+    ID_PACIENTE, ID_DEPENDENTE, BOL_ATIVO, DT_FIM
+) VALUES
+(1,1,TRUE,NULL), (2,2,TRUE,NULL), (3,3,TRUE,NULL), (4,4,FALSE,'2022-01-01'),
+(5,5,TRUE,NULL), (6,6,TRUE,NULL), (7,7,FALSE,'2021-06-10'), (8,8,TRUE,NULL),
+(9,9,TRUE,NULL), (10,10,TRUE,NULL);
+
+INSERT INTO EXAMES_PACIENTE (
+    ID_PACIENTE, ID_TIPO_EXAME, ID_EMPRESA, ID_DEPARTAMENTO, ID_CARGO,
+    DT_MUDANCA, DT_EXAME
+) VALUES
+(1,1,1,1,1,'2023-01-01','2023-01-10'),
+(2,2,2,2,2,'2023-02-01','2023-02-10'),
+(3,3,3,3,3,'2023-03-01','2023-03-10'),
+(4,4,4,4,4,'2023-04-01','2023-04-10'),
+(5,5,5,5,5,'2023-05-01','2023-05-10'),
+(6,6,6,6,6,'2023-06-01','2023-06-10'),
+(7,7,7,7,7,'2023-07-01','2023-07-10'),
+(8,8,8,8,8,'2023-08-01','2023-08-10'),
+(9,9,9,9,9,'2023-09-01','2023-09-10'),
+(10,10,10,10,10,'2023-10-01','2023-10-10');
+
+-- SELECTS PARA APRESENTAÇÃO
+
+-- 1. Lista de pacientes com nacionalidade, sexo e estado civil
+SELECT
+  P.NOME AS PACIENTE,
+  N.NOME AS NACIONALIDADE,
+  S.NOME AS SEXO,
+  EC.NOME AS ESTADO_CIVIL
+FROM PACIENTE P
+JOIN NACIONALIDADE N ON P.ID_NACIONALIDADE = N.ID
+JOIN SEXO S ON P.ID_SEXO = S.ID
+JOIN ESTADO_CIVIL EC ON P.ID_ESTADO_CIVIL = EC.ID;
+
+-- 2. Exames realizados por paciente, com empresa e tipo de exame
+SELECT
+  P.NOME AS PACIENTE,
+  E.NOME AS EMPRESA,
+  T.NOME AS TIPO_EXAME,
+  EP.DT_EXAME
+FROM EXAMES_PACIENTE EP
+JOIN PACIENTE P ON EP.ID_PACIENTE = P.ID
+JOIN EMPRESA E ON EP.ID_EMPRESA = E.ID
+JOIN TIPO_EXAME T ON EP.ID_TIPO_EXAME = T.ID;
+
+-- 3. Dependentes ativos dos pacientes
+SELECT
+  P.NOME AS PACIENTE,
+  D.NOME AS DEPENDENTE,
+  PD.BOL_ATIVO,
+  PD.DT_FIM
+FROM PACIENTE_DEPENDENTE PD
+JOIN PACIENTE P ON PD.ID_PACIENTE = P.ID
+JOIN DEPENDENTE D ON PD.ID_DEPENDENTE = D.ID
+WHERE PD.BOL_ATIVO = TRUE;
+
+-- 4. Quantidade de pacientes por estado civil
+SELECT
+  EC.NOME AS ESTADO_CIVIL,
+  COUNT(*) AS TOTAL
+FROM PACIENTE P
+JOIN ESTADO_CIVIL EC ON P.ID_ESTADO_CIVIL = EC.ID
+GROUP BY EC.NOME;
+
+-- 5. Exames realizados na empresa 'Empresa A'
+SELECT
+  P.NOME AS PACIENTE,
+  E.NOME AS EMPRESA,
+  T.NOME AS EXAME,
+  EP.DT_EXAME
+FROM EXAMES_PACIENTE EP
+JOIN PACIENTE P ON EP.ID_PACIENTE = P.ID
+JOIN EMPRESA E ON EP.ID_EMPRESA = E.ID
+JOIN TIPO_EXAME T ON EP.ID_TIPO_EXAME = T.ID
+WHERE E.NOME = 'Empresa A';
